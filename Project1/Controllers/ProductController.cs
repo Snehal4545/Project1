@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Project1.DAL;
 using Project1.Models;
 using System;
@@ -13,12 +14,19 @@ namespace Project1.Controllers
     public class ProductController : Controller
     {
         ProductDAL db = new ProductDAL();
+        CartDAL cd = new CartDAL();
         // GET: ProductController
         public ActionResult Index()
         {
             var model = db.GetAllProducts();
             return View(model);
         }
+        public ActionResult Products()
+        {
+            var model = db.GetAllProducts();
+            return View(model);
+        }
+
 
         // GET: ProductController/Details/5
         public ActionResult Details(int Id)
@@ -105,5 +113,44 @@ namespace Project1.Controllers
                 return View();
             }
         }
+       
+        public IActionResult AddToCart(int id)
+        {
+            string Uid = HttpContext.Session.GetString("Uid");
+            Cart cart = new Cart();
+            cart.Id = id;
+            cart.Uid = Convert.ToInt32(Uid);
+            int res = cd.AddToCart(cart);
+            if (res == 1)
+            {
+                return RedirectToAction("ViewCart");
+            }
+            else
+            {
+                return View();
+            }
+        }
+        [HttpGet]
+        public IActionResult ViewCart()
+        {
+            string Uid = HttpContext.Session.GetString("Uid");
+            var model = cd.ViewFromCart(Uid);
+            return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult RemoveFromCart(int Cid)
+        {
+            int res = cd.RemoveFromCart(Cid);
+            if (res == 1)
+            {
+                return RedirectToAction("ViewCart");
+            }
+            else
+            {
+                return View();
+            }
+        }
+
     }
 }

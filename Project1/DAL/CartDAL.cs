@@ -49,7 +49,7 @@ namespace Project1.DAL
                         " inner join Cart c on c.Id = p.Id " +
                         " where c.Uid = @Uid";
             cmd = new SqlCommand(qry, con);
-            cmd.Parameters.AddWithValue("@id", Convert.ToInt32(Uid));
+            cmd.Parameters.AddWithValue("@Uid", Convert.ToInt32(Uid));
             con.Open();
             dr = cmd.ExecuteReader();
             if (dr.HasRows)
@@ -61,6 +61,7 @@ namespace Project1.DAL
                     p.Name = dr["Name"].ToString();
                     p.Company = dr["Company"].ToString();
                     p.Price = Convert.ToInt32(dr["Price"]);
+                   
                     plist.Add(p);
                 }
                 con.Close();

@@ -59,7 +59,7 @@ namespace Project1.Controllers
                 HttpContext.Session.SetString("Name", user.EmailId.ToString());
                 HttpContext.Session.SetString("Id", user.Uid.ToString());
                 if (user.RoleId ==Roles.Customer)
-                    return RedirectToAction("Index", "Product");
+                    return RedirectToAction("Products", "Product");
                 else if (user.RoleId ==Roles.Admin)
                     return RedirectToAction("Index", "Product");
                 else
