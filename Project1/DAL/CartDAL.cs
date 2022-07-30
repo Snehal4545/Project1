@@ -45,7 +45,7 @@ namespace Project1.DAL
         public List<Product> ViewFromCart(string Uid)
         {
             List<Product> plist = new List<Product>();
-            string qry = "select p.Id,p.Name,p.Price, c.Cid,c.Uid from Product p " +
+            string qry = "select p.Id,p.Name,p.Price, p.Company, c.Cid,c.Uid from Product p " +
                         " inner join Cart c on c.Id = p.Id " +
                         " where c.Uid = @Uid";
             cmd = new SqlCommand(qry, con);

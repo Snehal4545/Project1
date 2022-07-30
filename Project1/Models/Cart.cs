@@ -12,7 +12,7 @@ namespace Project1.Models
     public class Cart
     {
         [Key]
-        [ScaffoldColumn(false)]
+        
         public int Cid { get; set; }
         public int Uid { get; set; }
         public int Id { get; set; }

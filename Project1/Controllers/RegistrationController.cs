@@ -57,7 +57,7 @@ namespace Project1.Controllers
             if(user.Password== reg.Password)
             {
                 HttpContext.Session.SetString("Name", user.EmailId.ToString());
-                HttpContext.Session.SetString("Id", user.Uid.ToString());
+                HttpContext.Session.SetString("Uid", user.Uid.ToString());
                 if (user.RoleId ==Roles.Customer)
                     return RedirectToAction("Products", "Product");
                 else if (user.RoleId ==Roles.Admin)

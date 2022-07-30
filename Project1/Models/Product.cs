@@ -16,5 +16,7 @@ namespace Project1.Models
         public string Name { get; set; }
         public string Company  { get; set; }
         public int Price { get; set; }
+        public int Cid { get; set; }
+        public int Uid { get; set; }
     }
 }

@@ -21,17 +21,32 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Product List</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Registration" asp-action="Create">Log In </a>
-                        </li>
+                        @if (!String.IsNullOrEmpty(HttpContextAccessor.HttpContext.Session.GetString("Uid")))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Product List</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="ViewCart">Cart </a>
+                            </li>
+                            <li class="nav-item" style="padding-left:350px">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">Welcome :@HttpContextAccessor.HttpContext.Session.GetString("Name")</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Logout">Logout</a>
+                            </li>
+                        }
+                        @if (String.IsNullOrEmpty(HttpContextAccessor.HttpContext.Session.GetString("Uid")))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Registration" asp-action="Create">Log In </a>
+                            </li>
+                        }
 
-                      
+
                     </ul>
                 </div>
             </div>
