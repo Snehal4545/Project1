@@ -15,6 +15,7 @@ namespace Project1.Controllers
     {
         ProductDAL db = new ProductDAL();
         CartDAL cd = new CartDAL();
+        OrderDAL od = new OrderDAL();
         // GET: ProductController
         public ActionResult Index()
         {
@@ -145,6 +146,45 @@ namespace Project1.Controllers
             if (res == 1)
             {
                 return RedirectToAction("ViewCart");
+            }
+            else
+            {
+                return View();
+            }
+        }
+        public IActionResult ViewProductForOrder(int id)
+        {
+            string Uid = HttpContext.Session.GetString("Uid");
+            Order or = new Order();
+            or.Id = id;
+            or.Uid = Convert.ToInt32(Uid);
+            int res = od.PlaceOrder(or);
+            if (res == 1)
+            {
+                return RedirectToAction("ViewOrder");
+            }
+            else
+            {
+                return View();
+            }
+
+           
+
+        }
+        [HttpGet]
+        public IActionResult ViewOrder()
+        {
+            string Uid = HttpContext.Session.GetString("Uid");
+            var model = od.ViewProductForOrder(Uid);
+            return View(model);
+        }
+        [HttpGet]
+        public IActionResult RemoveFromOrders(int Oid)
+        {
+            int res = od.RemoveFromOrders(Oid);
+            if (res == 1)
+            {
+                return RedirectToAction("ViewOrder");
             }
             else
             {

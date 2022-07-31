@@ -42,7 +42,10 @@
                         @if (String.IsNullOrEmpty(HttpContextAccessor.HttpContext.Session.GetString("Uid")))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Registration" asp-action="Create">Log In </a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Registration" asp-action="LogIn">Log In </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Registration" asp-action="Create">Registration </a>
                             </li>
                         }
 

@@ -76,7 +76,7 @@ namespace Project1.Controllers
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
-            return RedirectToAction("SignIn");
+            return RedirectToAction("LohIn");
         }
 
 
